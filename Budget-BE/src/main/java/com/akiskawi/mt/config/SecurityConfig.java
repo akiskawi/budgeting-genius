@@ -16,11 +16,18 @@ public class SecurityConfig   {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeHttpRequests(auth -> auth
+                .authorizeHttpRequests(
+                        auth -> auth
                         .requestMatchers("/", "/public").permitAll()
-                        .anyRequest().authenticated()
+                        .anyRequest().permitAll() //FIXME Change this to have oauth2
                 )
-                .oauth2Login(Customizer.withDefaults()); // Χρησιμοποιεί το GitHub OAuth
+                .oauth2Login(Customizer.withDefaults())
+                .logout(logout -> logout
+                        .logoutSuccessUrl("/")   // Redirect after logout
+                        .invalidateHttpSession(true)
+                        .clearAuthentication(true)
+                        .deleteCookies("JSESSIONID")
+                );// Χρησιμοποιεί το GitHub OAuth
         return http.build();
     }
 
