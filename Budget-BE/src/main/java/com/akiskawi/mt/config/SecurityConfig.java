@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.SecurityBuilder;
 import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -16,10 +17,12 @@ public class SecurityConfig   {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+                .csrf(AbstractHttpConfigurer::disable)
+                .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
                         auth -> auth
-                        .requestMatchers("/", "/public").permitAll()
-                        .anyRequest().permitAll() //FIXME Change this to have oauth2
+                        .requestMatchers("/").permitAll()
+                        .anyRequest().authenticated() //FIXME Change this to have oauth2
                 )
                 .oauth2Login(Customizer.withDefaults())
                 .logout(logout -> logout
