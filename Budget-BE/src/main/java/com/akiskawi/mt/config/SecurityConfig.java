@@ -22,7 +22,7 @@ public class SecurityConfig   {
                 .authorizeHttpRequests(
                         auth -> auth
                         .requestMatchers("/").permitAll()
-                        .anyRequest().authenticated() //FIXME Change this to have oauth2
+                        .anyRequest().permitAll() //FIXME Change this to have oauth2
                 )
                 .oauth2Login(Customizer.withDefaults())
                 .logout(logout -> logout

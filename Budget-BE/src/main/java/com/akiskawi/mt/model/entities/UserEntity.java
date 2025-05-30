@@ -7,9 +7,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
 @Document(collection = UserEntity.users)
 @Data
 @AllArgsConstructor
@@ -26,5 +23,4 @@ public class UserEntity {
     private String lastName;
     private String picture;
     private String email;
-    private LocalDateTime createdAt;
 }
