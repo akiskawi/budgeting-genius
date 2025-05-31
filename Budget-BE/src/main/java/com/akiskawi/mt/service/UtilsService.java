@@ -1,7 +1,6 @@
 package com.akiskawi.mt.service;
 
 import com.akiskawi.mt.model.entities.BankEntity;
-import com.akiskawi.mt.model.entities.ExpenseEntity;
 import com.akiskawi.mt.model.entities.UserEntity;
 import com.akiskawi.mt.repositories.BankRepository;
 import com.akiskawi.mt.repositories.ExpenseRepository;
@@ -18,14 +17,12 @@ public class UtilsService implements UtilsInterface {
     private final ExpenseRepository expenseRepository;
     private final BankRepository bankRepository;
 
-    private UserEntity userEntity = UserEntity.builder().build();
-    private ExpenseEntity expenseEntity = ExpenseEntity.builder().build();
-    private BankEntity bankEntity = BankEntity.builder().build();
+    private final UserEntity userEntity = UserEntity.builder().id("1").email("joe@doe.com").picture("pictureUrl").lastName("Doe").firstName("Joe").build();
+    private final BankEntity bankEntity = BankEntity.builder().id("1").money(100.0).name("Eurobank").userId("1").build();
 
     @Override
     public void initMongoDb() {
         userRepository.save(userEntity);
-        expenseRepository.save(expenseEntity);
         bankRepository.save(bankEntity);
 
     }

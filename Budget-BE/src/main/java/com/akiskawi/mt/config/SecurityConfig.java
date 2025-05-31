@@ -3,8 +3,6 @@ package com.akiskawi.mt.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
-import org.springframework.security.config.annotation.SecurityBuilder;
-import org.springframework.security.config.annotation.web.WebSecurityConfigurer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -12,7 +10,8 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig   {
+public class SecurityConfig {
+
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -21,12 +20,16 @@ public class SecurityConfig   {
                 .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(
                         auth -> auth
-                        .requestMatchers("/").permitAll()
-                        .anyRequest().permitAll() //FIXME Change this to have oauth2
+                                .requestMatchers("/public").permitAll()
+                                .anyRequest().authenticated() //FIXME Change this to have oauth2
                 )
                 .oauth2Login(Customizer.withDefaults())
+//                .oauth2Login(login -> login
+//                        .loginPage("http://localhost:8080" + "/user/create")
+//
+//                )
                 .logout(logout -> logout
-                        .logoutSuccessUrl("/")   // Redirect after logout
+                        .logoutSuccessUrl("/")   // Redirect after logout)
                         .invalidateHttpSession(true)
                         .clearAuthentication(true)
                         .deleteCookies("JSESSIONID")

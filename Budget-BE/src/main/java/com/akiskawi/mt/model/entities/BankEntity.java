@@ -1,7 +1,6 @@
 package com.akiskawi.mt.model.entities;
 
 
-import com.akiskawi.mt.model.Money;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,7 +9,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 
-@Document(collection  = BankEntity.expensesCollection)
+@Document(collection = BankEntity.expensesCollection)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -22,7 +21,7 @@ public class BankEntity {
     @Id
     private String id;
     private String name;
-    private Money money;
+    private Double money;
     private String userId;
 
 }

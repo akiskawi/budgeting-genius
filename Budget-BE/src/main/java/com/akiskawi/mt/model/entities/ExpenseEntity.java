@@ -1,6 +1,5 @@
 package com.akiskawi.mt.model.entities;
 
-import com.akiskawi.mt.model.Money;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,7 +9,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 
-@Document(collection  = ExpenseEntity.expensesCollection)
+@Document(collection = ExpenseEntity.expensesCollection)
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,7 +22,7 @@ public class ExpenseEntity {
     private String id;
 
     private String typeOfExpense;
-    private Money money;
+    private Double money;
     private LocalDateTime timeOfExpense;
     private String userId;
     private String bankId;
